@@ -15,6 +15,7 @@ class KotlinClass {
 
         val me = Person("Piruin Panicphol", "Thailand", 30, 58.0, 170.0)
         greeting(me)
+        me.greeting()
 
         val you = Person("Piruin Panicphol", "Thailand", 30, 58.0, 170.0)
         assert(me == you)
@@ -30,6 +31,10 @@ class KotlinClass {
             var age: Int,
             var weight: Double,
             val height: Double
-    )
+    ) {
+        fun greeting() {
+            println("Hello, my name is $name")
+        }
+    }
 
 }
