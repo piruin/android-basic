@@ -15,9 +15,12 @@ class KotlinClass {
 
         val me = Person("Piruin Panicphol", "Thailand", 30, 58.0, 170.0)
         print(me)
+
+        val you = Person("Piruin Panicphol", "Thailand", 30, 58.0, 170.0)
+        assert(me == you)
     }
 
-    class Person(
+    data class Person(
             val name: String,
             var address: String?,
             var age: Int,
