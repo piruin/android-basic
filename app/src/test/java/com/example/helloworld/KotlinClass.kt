@@ -14,10 +14,14 @@ class KotlinClass {
 //        person.weight = 58.5
 
         val me = Person("Piruin Panicphol", "Thailand", 30, 58.0, 170.0)
-        print(me)
+        greeting(me)
 
         val you = Person("Piruin Panicphol", "Thailand", 30, 58.0, 170.0)
         assert(me == you)
+    }
+
+    fun greeting(p: Person) {
+        println("Hi, ${p.name}. R u come from ${p.address}?")
     }
 
     data class Person(
