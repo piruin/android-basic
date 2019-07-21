@@ -5,12 +5,14 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.fab
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.content_login.login
 import kotlinx.android.synthetic.main.content_login.password
 import kotlinx.android.synthetic.main.content_login.username
+import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onLongClick
+import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,22 +27,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        fab.onClick {
+            Snackbar.make(fab, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
 
-        login.setOnClickListener {
+        login.onClick {
             val inputUser = username.text.toString()
             val inputPass = password.text.toString()
 
             val pass = userPassMap[inputUser]
             if (pass == inputPass) {
-                Toast.makeText(this, "Logged in", Toast.LENGTH_SHORT).show()
+                toast("Logged in")
                 username.text = null
                 password.text = null
             } else {
-                Toast.makeText(this, "Incorrect", Toast.LENGTH_SHORT).show()
+                toast("Incorrect")
+            }
+        }
+        login.onLongClick(returnValue = true) {
+            if (BuildConfig.DEBUG) {
+                username.setText("android")
+                password.setText("12341234")
             }
         }
     }
