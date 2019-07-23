@@ -6,9 +6,14 @@ class Repo(
 ) {
     var private = false
     var html_url: String? = null
-    var forks_count: Int = 0
+    val open_issues: Int = 0
+    var description: String? = null
     var stargazers_count: Int = 0
     var watchers_count: Int = 0
-    var size: Int = 0
+    var language: String? = null
+    var size = 0
+    var forks = 0
+    var watchers = 0
     var topics: List<String> = listOf()
+    var license: License? = null
 }

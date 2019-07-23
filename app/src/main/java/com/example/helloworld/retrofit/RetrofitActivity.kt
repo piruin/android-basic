@@ -2,9 +2,11 @@ package com.example.helloworld.retrofit
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import com.example.helloworld.R
+import kotlinx.android.synthetic.main.activity_retrofit.recyclerView
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,15 +36,20 @@ class RetrofitActivity : AppCompatActivity(), AnkoLogger {
                 with(response) {
                     if (isSuccessful) {
                         toast("success")
-                        body()!!.let {
-                            toast("Repo size = ${it.size}")
-                            it.forEach { info { it.full_name } }
-                        }
+                        body()!!.let { showRepo(it) }
                     } else {
                         toast("Not success!")
                     }
                 }
             }
         })
+    }
+
+    fun showRepo(repos: List<Repo>) {
+        with(recyclerView) {
+            adapter = RepoAdapater(repos)
+            layoutManager = LinearLayoutManager(context)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
     }
 }
