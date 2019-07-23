@@ -13,12 +13,15 @@ import kotlinx.android.synthetic.main.repo_item.view.lang
 import kotlinx.android.synthetic.main.repo_item.view.license
 import kotlinx.android.synthetic.main.repo_item.view.name
 import kotlinx.android.synthetic.main.repo_item.view.star
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class RepoAdapater(
         val repos: List<Repo>,
-        val limit: Int = Int.MAX_VALUE
+        val limit: Int = Int.MAX_VALUE,
+        val onClick: (Repo) -> Unit
 ) : RecyclerView.Adapter<RepoViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, position: Int) = RepoViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, position: Int) = RepoViewHolder(parent,
+            onClick)
 
     override fun getItemCount(): Int = repos.size.takeIf { it < limit } ?: limit
 
@@ -27,7 +30,7 @@ class RepoAdapater(
     }
 }
 
-class RepoViewHolder(parent: ViewGroup)
+class RepoViewHolder(parent: ViewGroup, val onClick: (Repo) -> Unit)
     : RecyclerView.ViewHolder(parent.inflate(R.layout.repo_item, false)) {
 
     fun bind(repo: Repo) {
@@ -42,6 +45,7 @@ class RepoViewHolder(parent: ViewGroup)
             issue.text = repo.open_issues.toString()
             license.text = repo.license?.name
             license.goneIfBlank()
+            onClick { onClick(repo) }
         }
     }
 

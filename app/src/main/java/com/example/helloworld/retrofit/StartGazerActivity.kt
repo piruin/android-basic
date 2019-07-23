@@ -24,8 +24,9 @@ class StartGazerActivity : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
+        val repo = intent.getStringExtra("repo").split("/")
         val service = retrofit.create(GitHubService::class.java)
-        service.listStarGazer("piruin", "quickaction").enqueue(object : Callback<List<User>> {
+        service.listStarGazer(repo[0], repo[1]).enqueue(object : Callback<List<User>> {
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
                 toast("Failure ${t.message}")
             }

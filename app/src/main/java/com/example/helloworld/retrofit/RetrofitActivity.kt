@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import com.example.helloworld.R
 import kotlinx.android.synthetic.main.activity_retrofit.recyclerView
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,7 +48,9 @@ class RetrofitActivity : AppCompatActivity(), AnkoLogger {
 
     fun showRepo(repos: List<Repo>) {
         with(recyclerView) {
-            adapter = RepoAdapater(repos)
+            adapter = RepoAdapater(repos) {
+                startActivity<StartGazerActivity>("repo" to it.full_name)
+            }
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
