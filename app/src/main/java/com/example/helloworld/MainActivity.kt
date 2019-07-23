@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.helloworld.retrofit.RetrofitActivity
 import kotlinx.android.synthetic.main.activity_main.fab
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.content_login.login
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.content_login.password
 import kotlinx.android.synthetic.main.content_login.username
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.sdk27.coroutines.onLongClick
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity() {
@@ -39,8 +41,7 @@ class MainActivity : AppCompatActivity() {
             val pass = userPassMap[inputUser]
             if (pass == inputPass) {
                 toast("Logged in")
-                username.text = null
-                password.text = null
+                startActivity<RetrofitActivity>()
             } else {
                 toast("Incorrect")
             }
