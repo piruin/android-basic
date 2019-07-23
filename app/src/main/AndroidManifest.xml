@@ -16,6 +16,10 @@
         android:exported="true">
     </activity>
     <activity
+        android:name=".retrofit.StartGazerActivity"
+        android:exported="true">
+    </activity>
+    <activity
         android:name=".recycler.DatasActivity"
         android:exported="true">
     </activity>
